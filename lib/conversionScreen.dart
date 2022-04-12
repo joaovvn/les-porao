@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ConversionScreen extends StatefulWidget {
@@ -40,7 +41,9 @@ class _ConversionScreenState extends State<ConversionScreen> {
                         color: Colors.blue),
                     width: MediaQuery.of(context).size.height * 0.15,
                     height: MediaQuery.of(context).size.height * 0.15,
-                    child: Image.asset("dolarEuro.png"),
+                    child: kIsWeb
+                        ? Image.network("assets/assets/dolarEuro.png")
+                        : Image.asset("dolarEuro.png"),
                   ),
                 ),
                 SizedBox(
@@ -102,7 +105,9 @@ class _ConversionScreenState extends State<ConversionScreen> {
                           color: Colors.blue),
                       width: MediaQuery.of(context).size.height * 0.15,
                       height: MediaQuery.of(context).size.height * 0.15,
-                      child: Image.asset("real.png"),
+                      child: kIsWeb
+                          ? Image.network("assets/assets/real.png")
+                          : Image.asset("real.png"),
                     ),
                   ),
                   SizedBox(
