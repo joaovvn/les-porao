@@ -19,7 +19,9 @@ class _ConversionScreenState extends State<ConversionScreen> {
           backgroundColor: Colors.blue,
           leading: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8, left: 30),
-            child: Image.asset("iconPorao.png"),
+            child: kIsWeb
+                ? Image.network("assets/assets/iconPorao.png")
+                : Image.asset("iconPorao.png"),
           ),
           title: const Center(
               child: Text(
