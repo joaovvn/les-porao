@@ -25,7 +25,7 @@ class _ConversionScreenState extends State<ConversionScreen> {
           ),
           title: const Center(
               child: Text(
-            'Porão - Conversão de Moedas',
+            'Porão',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           )),
         ),
@@ -64,6 +64,8 @@ class _ConversionScreenState extends State<ConversionScreen> {
                         )
                       ],
                       onChanged: (value) {
+                        inputController.text = '';
+                        outputController.text = '';
                         selectedCurrency = value.toString();
                         setState(() {});
                       }),
