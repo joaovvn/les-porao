@@ -1,16 +1,18 @@
 const express = require("express");
 
-const userRoutes = express.Router()
+const CreateUserController = require("../controller/User/CreateUserController");
 
-userRoutes.get("/teste",  (httpRequest, httpResponse) => {
-   return httpResponse.json({message: "Teste usuario"}).send();
-});
+const userRoutes = express.Router();
+const createUserController = new CreateUserController();
 
-userRoutes.post("/cadastro", (httpRequest, httpResponse) => {
-   return httpResponse.json({message: "Teste cadastro"}).send();
+userRoutes.post("/cadastro", async (httpRequest, httpResponse) => {
+   const result = await createUserController.handle(httpRequest, httpResponse)
+
+   return result;
 });
 
 userRoutes.post("/login", (httpRequest, httpResponse) => {
-   return httpResponse.json({message: "Teste login"}).send();
+   return httpResponse.json({ message: "Teste login" }).send();
 });
-module.exports = userRoutes
+
+module.exports = userRoutes;
