@@ -4,19 +4,19 @@ const UserModel = require("../../model/UserModel");
 const { findOne } = require("../../repository/UserRepository");
 
 class CreateUserService {
-  async execute({ no_user, email_user, password_user }) {
+  async execute({ name, email, password }) {
     // const checkUserExists = findOne({ email_user });
 
     // if (checkUserExists) {
     //   return
     // }
 
-    const hashPassword = await hash(password_user, 0);
+    const hashPassword = await hash(passwrod, 0);
 
-    const userCreated = knex("tb_user").insert({
-      no_user,
-      email_user,
-      password_user: hashPassword
+    const userCreated = knex("user").insert({
+      name,
+      email,
+      password: hashPassword
     });
 
     return userCreated;

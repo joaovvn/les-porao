@@ -3,13 +3,13 @@ const CreateUserService = require("../../service/User/CreateUserService");
 
 class CreateUserController {
   async handle(httpRequest, httpResponse) {
-    const { no_user, email_user, password_user } = httpRequest.body;
+    const { name, email, password } = httpRequest.body;
 
     const createUserService = new CreateUserService();
     await createUserService.execute({
-      no_user,
-      email_user,
-      password_user,
+      name,
+      email,
+      password,
     });
 
     return created(httpResponse, "User criado com sucesso!");
