@@ -3,11 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable('tb_user', (table) => {
-    table.increments('id_user')
-    table.text('no_user')
-    table.text('email_user')
-    table.text('password_user')
+  return knex.schema.createTable('user', (table) => {
+    table.increments('id').primary
+    table.text('name')
+    table.text('email')
+    table.text('password')
     table.integer('status').defaultTo(1)
 
     table.timestamp('created_at').defaultTo(knex.fn.now())
