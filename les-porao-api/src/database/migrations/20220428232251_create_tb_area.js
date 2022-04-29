@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable('area', (table) => {
-    table.increments('id').primary
+    table.increments('id').primary()
     table.text('name')
     table.integer('status').defaultTo(1)
 
