@@ -11,7 +11,7 @@ class CreateUserService {
     //   return
     // }
 
-    const hashPassword = await hash(passwrod, 0);
+    const hashPassword = await hash(password, 0);
 
     const userCreated = knex("user").insert({
       name,
