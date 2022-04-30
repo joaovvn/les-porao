@@ -1,18 +1,14 @@
-// const knex = require("../database")
+const knex = require("../database");
+const UserModel = require("../model/UserModel");
 
-// const findOne = ({ email_user }) => {
-//   const found = knex('tb_user').where('email_user', email_user)
-//   if (found) {
-//     return found;
-//   }
+const findOne = async ({ email }) => {
+  return knex(UserModel.tableName()).select().where('email', email);
+}
 
-//   return found;
-// }
-
-// const create = () => {
+// const create = ({name, email, password}) => {
 
 // }
 
-// module.exports = {
-//   findOne,
-// }
+module.exports = {
+  findOne,
+}

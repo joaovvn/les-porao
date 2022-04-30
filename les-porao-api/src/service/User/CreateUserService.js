@@ -5,15 +5,15 @@ const { findOne } = require("../../repository/UserRepository");
 
 class CreateUserService {
   async execute({ name, email, password }) {
-    // const checkUserExists = findOne({ email_user });
-
-    // if (checkUserExists) {
-    //   return
-    // }
-
     const hashPassword = await hash(password, 0);
 
-    const userCreated = knex("user").insert({
+    const userAlreadyExists = await findOne({ email });
+
+    if (userAlreadyExists.length > 0) {
+      return { error: "User ja existe." }
+    }
+
+    const userCreated = knex(UserModel.tableName()).insert({
       name,
       email,
       password: hashPassword

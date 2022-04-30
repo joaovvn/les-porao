@@ -1,6 +1,10 @@
 class UserModel {
   static tableName() {
-    return "tb_usuario";
+    return "user";
+  }
+
+  static columns() {
+    return ['id', 'name', 'email', 'password'];
   }
 }
 

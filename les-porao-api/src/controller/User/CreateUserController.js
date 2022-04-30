@@ -6,13 +6,13 @@ class CreateUserController {
     const { name, email, password } = httpRequest.body;
 
     const createUserService = new CreateUserService();
-    await createUserService.execute({
+    const result = await createUserService.execute({
       name,
       email,
       password,
     });
 
-    return created(httpResponse, "User criado com sucesso!");
+    return created(httpResponse, result);
   }
 }
 
