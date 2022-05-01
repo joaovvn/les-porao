@@ -516,11 +516,117 @@ class _HomeScreenState extends State<HomeScreen> {
                                       side: MaterialStateProperty.all(
                                           const BorderSide(
                                               color: Colors.black))),
-                                  onPressed: () {
-                                    cadastro(
-                                        nome: nomeController.toString(),
-                                        email: emailController.toString(),
-                                        senha: senhaController.toString());
+                                  onPressed: () async {
+                                    bool isComplete =
+                                        nomeController.text.isNotEmpty &
+                                            emailController.text.isNotEmpty &
+                                            senhaController.text.isNotEmpty;
+                                    if (isComplete) {
+                                      var response = await cadastro(
+                                          nome: nomeController.text,
+                                          email: emailController.text,
+                                          senha: senhaController.text);
+                                      if (response == 201) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  alignment: Alignment.center,
+                                                  backgroundColor:
+                                                      const Color.fromARGB(
+                                                          255, 122, 195, 255),
+                                                  title: const Center(
+                                                      child: Text(
+                                                    'Usuário cadastrado com sucesso!',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )),
+                                                  actions: [
+                                                    Center(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                                backgroundColor:
+                                                                    MaterialStateProperty
+                                                                        .all(Colors
+                                                                            .white)),
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                              login(
+                                                                  email:
+                                                                      emailController
+                                                                          .text,
+                                                                  senha:
+                                                                      senhaController
+                                                                          .text);
+                                                            },
+                                                            child: const Text(
+                                                              'OK',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .black),
+                                                            )),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ));
+                                      }
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        left: 40, top: 10),
+                                                backgroundColor: Colors.red,
+                                                title: const Center(
+                                                    child: Text(
+                                                        'Erro ao Cadastrar')),
+                                                content: const Text(
+                                                    'Complete todos os campos!'),
+                                                actions: [
+                                                  Center(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all(Colors
+                                                                          .white)),
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  context),
+                                                          child: const Text(
+                                                            'OK',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .black),
+                                                          )),
+                                                    ),
+                                                  )
+                                                ],
+                                              ));
+                                    }
                                   },
                                   child: Text(
                                     "Cadastrar",
