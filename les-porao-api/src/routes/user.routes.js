@@ -24,17 +24,17 @@ const signInUserController = new SignInUserController();
  }
 }
 */
-userRoutes.post("/cadastro", async (httpRequest, httpResponse) => {
+userRoutes.post("/cadastro", cors(), async (httpRequest, httpResponse) => {
    const result = await createUserController.handle(httpRequest, httpResponse);
 
    return result;
 });
 
-userRoutes.options("/cadastro", cors(), async (httpRequest, httpResponse) => {
-   const result = await createUserController.handle(httpRequest, httpResponse);
+// userRoutes.options("/cadastro", cors(), async (httpRequest, httpResponse) => {
+//    const result = await createUserController.handle(httpRequest, httpResponse);
 
-   return result;
-});
+//    return result;
+// });
 
 /**
 * @api {get} /user/login
@@ -57,9 +57,9 @@ userRoutes.post("/login", async (httpRequest, httpResponse) => {
    return result;
 });
 
-userRoutes.options("/login", cors(), async (httpRequest, httpResponse) => {
-   const result = await signInUserController.handle(httpRequest, httpResponse);
-   return result;
-});
+// userRoutes.options("/login", cors(), async (httpRequest, httpResponse) => {
+//    const result = await signInUserController.handle(httpRequest, httpResponse);
+//    return result;
+// });
 
 module.exports = userRoutes;
