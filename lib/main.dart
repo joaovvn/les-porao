@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lesporao/conversionScreen.dart';
+import 'package:lesporao/screens/homeScreen.dart';
+import 'package:lesporao/screens/loginScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Porão',
       theme: ThemeData.dark(),
-      home: ConversionScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/login': (context) => const LoginScreen()
+      },
     );
   }
 }
