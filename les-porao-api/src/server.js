@@ -11,9 +11,9 @@ app.use(routes);
 app.use(cors());
 
 app.get('/', (req, res) => {
-   res.send('API OK ERRO 200')
+   res.send('API OK ERRO 200 -> v1.0.0');
 })
 
 app.listen(PORT, () => {
-   console.log(`Rodando na porta ${PORT}!`)
+   console.log(`Rodando na porta ${PORT}!`);
 });
