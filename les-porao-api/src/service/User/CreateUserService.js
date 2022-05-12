@@ -1,7 +1,7 @@
 const { hash } = require("bcrypt");
 const knex = require("../../database/index");
 const UserModel = require("../../model/UserModel");
-const { findOne } = require("../../repository/UserRepository");
+const { findOne, create } = require("../../repository/UserRepository");
 
 class CreateUserService {
   async execute({ name, email, password }) {
@@ -13,11 +13,11 @@ class CreateUserService {
       return { error: "User ja existe." }
     }
 
-    const userCreated = knex(UserModel.tableName()).insert({
+    const userCreated = create({
       name,
       email,
       password: hashPassword
-    });
+    })
 
     return userCreated;
   }
