@@ -25,15 +25,15 @@ const signInUserController = new SignInUserController();
 }
 */
 userRoutes.post("/cadastro", cors(), async (httpRequest, httpResponse) => {
-   const result = await createUserController.handle(httpRequest, httpResponse);
+  const result = await createUserController.handle(httpRequest, httpResponse);
 
-   return result;
+  return result;
 });
 
 userRoutes.options("/cadastro", cors(), async (httpRequest, httpResponse) => {
-   const result = await createUserController.handle(httpRequest, httpResponse);
+  const result = await createUserController.handle(httpRequest, httpResponse);
 
-   return result;
+  return result;
 });
 
 /**
@@ -53,13 +53,13 @@ userRoutes.options("/cadastro", cors(), async (httpRequest, httpResponse) => {
 }
 */
 userRoutes.post("/login", cors(), async (httpRequest, httpResponse) => {
-   const result = await signInUserController.handle(httpRequest, httpResponse);
-   return result;
+  const result = await signInUserController.handle(httpRequest, httpResponse);
+  return result;
 });
 
 userRoutes.options("/login", cors(), async (httpRequest, httpResponse) => {
-   const result = await signInUserController.handle(httpRequest, httpResponse);
-   return result;
+  const result = await signInUserController.handle(httpRequest, httpResponse);
+  return result;
 });
 
 module.exports = userRoutes;
