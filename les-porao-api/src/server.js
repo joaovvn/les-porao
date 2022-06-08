@@ -11,7 +11,7 @@ app.use(routes);
 app.use(cors());
 
 app.get('/', (req, res) => {
-   res.send('API OK ERRO 200 -> v1.0.0');
+   res.send('API OK ERRO 200 -> v1.1.0');
 })
 
 app.listen(PORT, () => {

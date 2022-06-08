@@ -1,20 +1,24 @@
-const { serverError, created } = require("../../helpers/http_response");
+const { serverError, created, unauthorized } = require("../../helpers/http_response");
+const CreateVagaService = require("../../service/Vagas/CreateVagaService");
 
 class CreateVagasController {
   async handle(httpRequest, httpResponse) {
     try {
-      const { name, description, id_cargo } = httpRequest.body;
-      const teste = httpRequest.user;
-      console.log("teste", teste);
+      const { name, id_cargo } = httpRequest.body;
+      const { id: id_user, iscompany } = httpRequest.user;
+      console.log("isCompany", httpRequest.user)
 
-      const createUserService = new CreateUserService();
-      const result = await createUserService.execute({
-        name,
-        description,
-        id_cargo,
-      });
+      const createVagaService = new CreateVagaService();
+      if (iscompany) {
+        const result = await createVagaService.execute({
+          name,
+          id_cargo,
+          id_user,
+        });
 
-      return created(httpResponse, result);
+        return created(httpResponse, result);
+      }
+      return unauthorized(httpResponse, "Sem autorizacao!");
     } catch (error) {
       return serverError(httpResponse, error);
     }

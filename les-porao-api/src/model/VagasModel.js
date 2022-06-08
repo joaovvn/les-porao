@@ -1,10 +1,10 @@
 class VagasModel {
   static tableName() {
-    return "vagas";
+    return "vagasUser";
   }
 
   static columns() {
-    return ['id_vaga', 'name', 'id_cargo', 'id_user'];
+    return ['id', 'name', 'id_cargo', 'id_user'];
   }
 }
 

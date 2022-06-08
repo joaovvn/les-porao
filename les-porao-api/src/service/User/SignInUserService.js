@@ -26,6 +26,7 @@ class SignInUserService {
           id: findUser.id,
           name: findUser.name,
           email: findUser.email,
+          iscompany: findUser.iscompany,
         },
         "3u4m0p0r40"
       );

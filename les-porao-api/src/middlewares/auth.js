@@ -12,6 +12,7 @@ function auth(httpRequest, httpResponse, next) {
 
   try {
     const user = verify(token, "3u4m0p0r40");
+    console.log("user", user)
     httpRequest.user = user;
 
     return next();
