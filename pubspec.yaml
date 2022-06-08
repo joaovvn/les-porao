@@ -38,6 +38,7 @@ dependencies:
   dio: ^4.0.6
   rxdart: ^0.27.3
   http: ^0.13.4
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,8 @@ flutter:
     - assets/iconPorao.png
     - assets/dolarEuro.png
     - assets/real.png
+    - assets/background.jpg
+    - assets/homeBackground.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
