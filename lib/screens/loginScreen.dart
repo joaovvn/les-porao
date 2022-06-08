@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lesporao/controllers/apiController.dart';
 import 'package:lesporao/widgets/appBar.dart';
@@ -22,7 +23,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ? Center(
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Colors.blue,
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.white,
+                          Color.fromARGB(255, 102, 186, 255)
+                        ]),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 width: MediaQuery.of(context).size.width * 0.4,
                 height: MediaQuery.of(context).size.height * 0.8,
@@ -43,37 +50,41 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width * 0.2,
                         child: TextField(
-                          cursorColor: Colors.white,
+                          cursorColor: Colors.black,
                           cursorHeight:
                               MediaQuery.of(context).size.height * 0.02,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               icon: const Icon(
                                 Icons.email,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               labelText: "E-mail",
-                              labelStyle: const TextStyle(color: Colors.white)),
+                              labelStyle: const TextStyle(color: Colors.black)),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width * 0.2,
                         child: TextField(
-                          cursorColor: Colors.white,
+                          onSubmitted: (String) async => await logar(
+                              emailController.text,
+                              senhaController.text,
+                              context),
+                          cursorColor: Colors.black,
                           cursorHeight:
                               MediaQuery.of(context).size.height * 0.02,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           controller: senhaController,
                           obscureText: true,
                           obscuringCharacter: "*",
@@ -81,17 +92,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               icon: const Icon(
                                 Icons.password,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               labelText: "Senha",
-                              labelStyle: const TextStyle(color: Colors.white)),
+                              labelStyle: const TextStyle(color: Colors.black)),
                         ),
                       ),
                       SizedBox(
@@ -102,20 +113,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: MediaQuery.of(context).size.width * 0.08,
                           child: ElevatedButton(
                               style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(3),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromARGB(255, 147, 206, 255)),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20))),
                                   side: MaterialStateProperty.all(
-                                      const BorderSide(color: Colors.white))),
+                                      const BorderSide(color: Colors.black))),
                               onPressed: () async {
-                                await login(
-                                    email: emailController.text,
-                                    senha: senhaController.text);
+                                await logar(emailController.text,
+                                    senhaController.text, context);
                               },
                               child: Text(
                                 "Login",
                                 style: TextStyle(
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize:
                                         MediaQuery.of(context).size.width *
@@ -148,37 +162,37 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.all(10),
                         height: MediaQuery.of(context).size.height * 0.1,
                         child: TextField(
-                          cursorColor: Colors.white,
+                          cursorColor: Colors.black,
                           cursorHeight:
                               MediaQuery.of(context).size.height * 0.02,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               icon: const Icon(
                                 Icons.email,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               labelText: "E-mail",
-                              labelStyle: const TextStyle(color: Colors.white)),
+                              labelStyle: const TextStyle(color: Colors.black)),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(10),
                         height: MediaQuery.of(context).size.height * 0.1,
                         child: TextField(
-                          cursorColor: Colors.white,
+                          cursorColor: Colors.black,
                           cursorHeight:
                               MediaQuery.of(context).size.height * 0.02,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           controller: senhaController,
                           obscureText: true,
                           obscuringCharacter: "*",
@@ -186,17 +200,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide:
-                                      const BorderSide(color: Colors.white)),
+                                      const BorderSide(color: Colors.black)),
                               icon: const Icon(
                                 Icons.password,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               labelText: "Senha",
-                              labelStyle: const TextStyle(color: Colors.white)),
+                              labelStyle: const TextStyle(color: Colors.black)),
                         ),
                       ),
                       SizedBox(
@@ -209,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           borderRadius:
                                               BorderRadius.circular(20))),
                                   side: MaterialStateProperty.all(
-                                      const BorderSide(color: Colors.white))),
+                                      const BorderSide(color: Colors.black))),
                               onPressed: () async {
                                 await login(
                                     email: emailController.text,
@@ -227,5 +241,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
     );
+  }
+}
+
+logar(String email, String senha, BuildContext context) async {
+  var response = await login(email: email, senha: senha);
+  if (response == 200) {
+    Navigator.pushNamed(context, '/main');
+  } else if (response == 0) {
+    showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+              content: Text(
+                'Usuário não autorizado!',
+                textAlign: TextAlign.center,
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              backgroundColor: Colors.red,
+            ));
   }
 }

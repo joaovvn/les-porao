@@ -18,13 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
     TextEditingController emailController = TextEditingController();
     TextEditingController senhaController = TextEditingController();
     return Scaffold(
-        appBar: appBar(true),
+        appBar: appBar(false),
         body: Center(
           child: isLandScape
               ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
                     decoration: const BoxDecoration(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 102, 186, 255),
                         borderRadius:
                             BorderRadius.horizontal(left: Radius.circular(20))),
                     width: MediaQuery.of(context).size.width * 0.3,
@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Bem-vindo de volta!",
                             style: TextStyle(
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize:
                                     MediaQuery.of(context).size.width * 0.025),
@@ -47,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               "Já possui uma conta?\nFaça o login novamente",
                               style: TextStyle(
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w100,
                                   fontSize: MediaQuery.of(context).size.width *
                                       0.010),
@@ -57,6 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.08,
                               child: ElevatedButton(
                                   style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(3),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              const Color.fromARGB(
+                                                  255, 102, 186, 255)),
                                       shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:
@@ -71,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     "Login",
                                     style: TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             MediaQuery.of(context).size.width *
@@ -82,9 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.horizontal(right: Radius.circular(20)),
-                        color: Color.fromARGB(255, 122, 195, 255)),
+                      gradient: LinearGradient(colors: [
+                        Color.fromARGB(255, 102, 186, 255),
+                        Colors.white
+                      ]),
+                      borderRadius:
+                          BorderRadius.horizontal(right: Radius.circular(20)),
+                    ),
                     height: MediaQuery.of(context).size.height * 0.8,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Column(
@@ -189,10 +201,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.08,
                               child: ElevatedButton(
                                   style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(3),
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               const Color.fromARGB(
-                                                  255, 122, 195, 255)),
+                                                  255, 179, 221, 255)),
                                       shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:
@@ -232,37 +245,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   )),
                                                   actions: [
                                                     Center(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(10.0),
-                                                        child: ElevatedButton(
-                                                            style: ButtonStyle(
-                                                                backgroundColor:
-                                                                    MaterialStateProperty
-                                                                        .all(Colors
-                                                                            .white)),
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                              login(
-                                                                  email:
-                                                                      emailController
-                                                                          .text,
-                                                                  senha:
-                                                                      senhaController
-                                                                          .text);
-                                                            },
-                                                            child: const Text(
-                                                              'OK',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .black),
-                                                            )),
-                                                      ),
+                                                      child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                              elevation:
+                                                                  MaterialStateProperty
+                                                                      .all(3),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all(Colors
+                                                                          .white)),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushNamed(
+                                                                    '/main');
+                                                          },
+                                                          child: const Text(
+                                                            'OK',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .black),
+                                                          )),
                                                     )
                                                   ],
                                                 ));
@@ -292,9 +298,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               10.0),
                                                       child: ElevatedButton(
                                                           style: ButtonStyle(
-                                                              backgroundColor:
+                                                              elevation:
                                                                   MaterialStateProperty
-                                                                      .all(Colors
+                                                                      .all(3),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty.all(
+                                                                      Colors
                                                                           .white)),
                                                           onPressed: () =>
                                                               Navigator.pop(
@@ -364,6 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: ElevatedButton(
                                   style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(3),
                                       shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:
@@ -505,6 +515,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: ElevatedButton(
                                   style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(3),
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               const Color.fromARGB(
@@ -552,6 +563,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 .all(10.0),
                                                         child: ElevatedButton(
                                                             style: ButtonStyle(
+                                                                elevation:
+                                                                    MaterialStateProperty
+                                                                        .all(3),
                                                                 backgroundColor:
                                                                     MaterialStateProperty
                                                                         .all(Colors
@@ -606,9 +620,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               10.0),
                                                       child: ElevatedButton(
                                                           style: ButtonStyle(
-                                                              backgroundColor:
+                                                              elevation:
                                                                   MaterialStateProperty
-                                                                      .all(Colors
+                                                                      .all(3),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty.all(
+                                                                      Colors
                                                                           .white)),
                                                           onPressed: () =>
                                                               Navigator.pop(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 String baseUrl = 'https://lesporao.herokuapp.com/';
@@ -6,7 +8,7 @@ Future<int?> cadastro(
     {required String nome,
     required String email,
     required String senha}) async {
-  Dio dio = new Dio();
+  Dio dio = Dio();
   dio.options.headers['content-type'] = 'application/json';
   dio.options.headers['Access-Control-Allow-Credentials'] = true;
   dio.options.headers['Access-Control-Allow-Origin'] = '*';
@@ -24,8 +26,8 @@ Future<int?> cadastro(
   }
 }
 
-Future<Object> login({required String email, required String senha}) async {
-  Dio dio = new Dio();
+Future<int?> login({required String email, required String senha}) async {
+  Dio dio = Dio();
   dio.options.headers['content-type'] = 'application/json';
   dio.options.headers['Access-Control-Allow-Credentials'] = true;
   dio.options.headers['Access-Control-Allow-Origin'] = '*';
@@ -35,9 +37,21 @@ Future<Object> login({required String email, required String senha}) async {
   try {
     Response response = await dio.post(baseUrl + 'user/login',
         data: {'password': senha, 'email': email});
-    return response;
+    print(response.data);
+    return response.statusCode;
   } on DioError catch (e) {
     print(e);
-    return e;
+    return 0;
+  }
+}
+
+getConversion() async {
+  Dio dio = Dio();
+  try {
+    Response response =
+        await dio.get('https://api.hgbrasil.com/finance/?format=json-cors');
+    return jsonDecode(response.toString());
+  } on DioError catch (e) {
+    return e.toString();
   }
 }

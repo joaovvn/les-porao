@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 PreferredSizeWidget appBar(bool isHome) {
   return AppBar(
-    backgroundColor: Colors.blue,
+    backgroundColor: const Color.fromARGB(255, 102, 186, 255),
     leading: Builder(builder: (context) {
       return Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 8, left: 30),
