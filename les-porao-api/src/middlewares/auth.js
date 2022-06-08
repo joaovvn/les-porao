@@ -11,7 +11,9 @@ function auth(httpRequest, httpResponse, next) {
   const [, token] = authToken.split(" ");
 
   try {
-    verify(token, "3u4m0p0r40");
+    const user = verify(token, "3u4m0p0r40");
+    httpRequest.user = user;
+
     return next();
   } catch (err) {
     return unauthorized(httpResponse, "Token invalid");

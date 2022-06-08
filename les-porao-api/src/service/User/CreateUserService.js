@@ -13,7 +13,6 @@ class CreateUserService {
       return { error: "User ja existe." };
     }
 
-    console.log("aaa", iscompany);
     const userCreated = create({
       name,
       email,
